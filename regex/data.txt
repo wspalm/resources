@@ -1,0 +1,62 @@
+
+
+
+Data
+
+abcdefghijklmnopqrstuvwxyz
+0123456789
+
+*!@#$%^&`_,.?{}<>()/\
+
+//email detection
+andy@gmail.com
+andy14@gmail.com
+andy14-1@gmail.com
+andy@hotmail.com
+andy@yahoo.com
+14@gmail.com
+andy-14.yes@gmail.com
+
+//domain detection
+www.andy.com
+www.andy.org
+www.andy.co.th
+www.andy.io
+www.andy.ac.th
+andy.com
+
+
+//number pattern crunching
+012345678
+01-234-5678
+(01)-234-5678
+Jason
+jason
+mason
+Az12345abc   .*[a-z][A-Z]*\d{4}.*
+aA12345
+Please make me a call at 012-234-1423
+
+ 
+
+
+//start and end word detection
+hello there
+Good bye
+start with  ^hello
+end with    bye$
+
+
+//data extraction
+
+2021-06-21
+12th September, 2020
+
+
+//transaction number extraction
+160.86VISA12345678
+270.76MASTER42365678
+
+//email subject
+Subject:Regarding your business query   ^Subject.*$
+

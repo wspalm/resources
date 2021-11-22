@@ -1,0 +1,55 @@
+<script type="text/javascript">
+	//regular expression is used to
+	//match or validate pattern in the data
+	//discover useful pattern in the data
+   var pattern = /\d{5}/g;
+   var data = '12345';
+   var output = data.match(pattern);
+   console.log(output);
+
+   console.log('================');
+    var pattern = /love/gi;
+   data = 'I Love you. Do you love me';
+   output = data.match(pattern);
+   console.log(output);
+
+   console.log('================');
+   data = "0621231234 0621231235";  
+   var pattern= /\d{10}/g;
+   output = data.match(pattern);
+   console.log(output);
+
+    console.log('=====detection phone number with - option ==========');
+   data = "0621231234 0631231235 064-123-1236";  
+   var pattern= /\d{3}-?\d{3}-?\d{3}/g;
+   output = data.match(pattern);
+   console.log(output);
+
+   console.log('=======detect phone number with digit options========');
+   data = "0621231234 0631231235 064-123-1236 06-123-1237";  
+   var pattern= /\d{2,3}-?\d{3}-?\d{3}/g;
+   output = data.match(pattern);
+   console.log(output);
+
+   console.log('=======detect email address========');
+   data = "sam@gmail.com";  
+   var pattern= /\w+@gmail.com/g;
+   output = data.match(pattern);
+   console.log(output);
+
+    console.log('=======detect email addresses========');
+   data = "sam@gmail.com john@gmail.com andy@gmail.com";  
+   var pattern= /\w+@gmail.com/g;
+   output = data.match(pattern);
+   console.log(output);
+
+     console.log('=======detect email addresses with different domain name========');
+   data = "sam@gmail.com john@yahoo.com andy@gmail.org";  
+   var pattern= /\w+@(gmail|yahoo).(com|org)/g;
+   output = data.match(pattern);
+   console.log(output);
+
+
+
+
+</script>

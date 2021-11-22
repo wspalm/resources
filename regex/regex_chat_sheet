@@ -1,0 +1,30 @@
+regex_chat_sheet
+Regular Expression
+
+. 		Any characters
+.-               Any single character with case sensitive
+\d 		Digit
+\D 		Not a Digit
+\w		Word character {a-z, A-Z, 0-9, _}
+
+\W              Meta Character
+\s      WhiteSpace {space, table, newline}
+\S      Not a WhiteSpace 
+^		beginning of a string
+$ 		End of a String
+
+[] 		character set
+[-,]	either - or .
+[89]	either 8 or 9
+[1-7]	1 to 7
+[^]		matches anything except
+
+[^b]at  matches anything not b followed by a and t
+()		group
+
+Quantifiers:
+*		0 or more
++		1 or more
+? 		0 or more
+{3}		three digits
+{3,4}		at least 3 digits and at most 4 digits

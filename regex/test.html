@@ -1,0 +1,71 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        
+
+    </body>
+</html>
+<script>
+
+    var data = `
+        www.andy.com
+        www.andy.org
+        www.andy.co.th
+        www.andy.io
+        www.andy.ac.th
+        andy.com
+    `;
+
+    var pattern = /(www.)?(\w*).(com|org|co|io|ac)(.th)?/g;
+
+    //method1: extract only content for multiple occurances
+    var result = data.match(pattern);
+    console.log(result);
+    console.log('==');
+    //method2: extract all group for multiple occurances
+     
+    reg = new RegExp(pattern);   
+    var result;
+    while (result = reg.exec(data))
+    {
+        console.log(result);
+    }
+    console.log('==');
+
+    data = `
+        160.86VISA12345678TH
+        270.75MASTER42365678JP
+        360.86VISA52345678TH
+        470.86MASTER32365678JP
+        260.26VISA22345678USA
+        170.36MASTER12365678TH
+
+    `;
+    pattern = /(\d+\.\d+)([A-Z]+)(\d+)/g;
+ 
+ 
+    var csvContent = "data:text/csv;charset=utf-8," 
+    csvContent +="amount,card,tran id\n";
+    reg = new RegExp(pattern);   
+    var result;
+
+    while (result = reg.exec(data))
+    {
+         csvContent += result[1]+","+result[2]+","+result[3]+"\n";
+       
+    }
+ 
+    //how to download the dta as csv file
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "my_data.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This will download the data file named "my_data.csv".
+
+ 
+
+</script>
