@@ -1,0 +1,155 @@
+0. Install dependency
+
+
+
+  provider: ^5.0.0
+  http: ^0.13.3
+  badges: ^2.0.1
+
+1. create central store structure
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => Store(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+      ),
+    ),
+  );
+} //ef
+
+2.Create Store class and implement login information
+
+
+3. Login with the following method
+
+
+//3.1. standard login with http url
+
+  Future<String> LoginHttp() async {
+    try {
+
+
+      var map1 =
+          json.encode({"userName": "root@localhost.com", "password": "1234"});
+      final response = await http.post(
+          Uri.parse("http://192.168.1.2:1974/api/Account/Login"),
+          headers: {"Content-Type": 'application/json'},
+          body: map1);
+      print(response.statusCode);
+      print(response.body);
+      var result = json.decode(response.body);
+      return "yes";
+    } catch (ex) {
+      print(ex);
+      return "bad";
+    }
+  } //ef
+
+//3.2. standard login with https  
+
+  Future<String> LoginHttps() async {
+    try {
+      //1 create client instance
+      HttpClient client = new HttpClient();
+      client.badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
+
+      //2 define url
+      String url = 'https://192.168.1.2:1975/api/Account/Login';
+
+      //3. define post data
+      Map map = {"userName": "root@localhost.com", "password": "1234"};
+
+      //3. create request instance
+      HttpClientRequest request = await client.postUrl(Uri.parse(url));
+
+      //4. set request header-> content type
+      request.headers.set('content-type', 'application/json');
+
+      //5. add post data to the header
+      request.add(utf8.encode(json.encode(map)));
+
+      //6. get response from request instance
+      HttpClientResponse response = await request.close();
+      //7. convert response body to json text
+      String reply = await response.transform(utf8.decoder).join();
+      print(json.decode(reply)['token']);
+      print(json.decode(reply)['roles']);
+      print(json.decode(reply)['expiration']);
+
+      return "yes";
+    } catch (ex) {
+      print(ex);
+      return "bad";
+    }
+  } //ef
+
+  //3.3 standard login with https  
+
+  Future<String> DataHttps() async {
+    try {
+      //1 create client instance
+      HttpClient client = new HttpClient();
+      client.badCertificateCallback =
+          ((X509Certificate cert, String host, int port) => true);
+
+      //2 define url
+      String url = 'https://192.168.1.2:1975/api/Api/Data';
+
+      //3. define post data
+
+      //3. create request instance
+      HttpClientRequest request = await client.getUrl(Uri.parse(url));
+
+      //4. set request header-> content type
+      request.headers.set('content-type', 'application/json');
+
+      String token =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoicm9vdEBsb2NhbGhvc3QuY29tIiwianRpIjoiMTQwY2E4YzgtYmM5Yy00NWQzLTg4MDAtYTI1ZWM0MDA1YTRiIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiYWRtaW4iLCJleHAiOjE2MzAzOTUzNTgsImlzcyI6IlBvd2VyTmF0dXJlIiwiYXVkIjoiUG93ZXJOYXR1cmUifQ.ROkmX_K4eRfCZ5bBByUK9JLRC9R57Rh9yYFmkHF2FUK";
+      request.headers.set('Authorization', 'Bearer $token');
+
+      //5. add post data to the header
+
+      //6. get response from request instance
+      HttpClientResponse response = await request.close();
+      //7. convert response body to json text
+      String reply = await response.transform(utf8.decoder).join();
+      print(response.statusCode);
+      print(reply);
+
+      return "yes";
+    } catch (ex) {
+      print(ex);
+      return "bad";
+    }
+  } //ef
+
+
+
+//4. shopping cart example
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'model.dart';
+
+ //send order
+  Future<String> sendOrder() async {
+    //1.define the dictionary/map that will be send to the sever
+    var maps = _cart.map((o) => o.toMap()).toList();
+    var order = {"customerId": 1, "orders": maps};
+    var jsonText = json.encode(order);
+    //2. define the http post header
+    var h1 = {'Accept': 'application/json', 'Content-Type': 'application/json'};
+    //3. call function to send the post information to the sever
+    var response = await http.post(route2, body: jsonText, headers: h1);
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    return "yes";
+    //4. get the response from the server and then do something
+  } //ef
+
+} //ec
+
+ 
+ 
